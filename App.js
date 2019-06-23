@@ -83,7 +83,7 @@ export default class ADonate extends Component {
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Unicef", ENV)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>Environmental{"\n"}{"\&"} Animal Care</Text>
+            <Text style={localStyles.buttonText}>World Wildlife Fund {"\n"}(WWF)</Text>
             {/* <Image source={require('./img/unicef.jpg')}  style={localStyles.img}/> */}
           </TouchableHighlight>
 
@@ -91,14 +91,14 @@ export default class ADonate extends Component {
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Amnesty International", SOCIAL)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>Health {"\&"} Social</Text>
+            <Text style={localStyles.buttonText}>Doctors Without {"\n"}Borders</Text>
           </TouchableHighlight>
 
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Amnesty International", RIGHTS)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>Human Rights</Text>
+            <Text style={localStyles.buttonText}>Amnesty International</Text>
           </TouchableHighlight>
         </View>
       </View>

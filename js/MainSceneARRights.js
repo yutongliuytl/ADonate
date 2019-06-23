@@ -38,29 +38,22 @@ var styles = StyleSheet.create({
 var createReactClass = require('create-react-class');
 
 var MainSceneAR = createReactClass({
+  
   getInitialState() {
     return {
-      text : "Initializing AR..."
-    };
-  },
-
-  _onPinch(pinchState, scaleFactor, source) {
-    let newScale = this.state.scale.map((x)=>{return x * scaleFactor})
-  
-    if (pinchState == 3) {
-      this.setState({
-        scale: newScale
-      });
-  
-      return;
+      scale:[.2, .2, .2],
+      rotation:[0,0,0],
+      text: "Initializing AR...",
+      point: 0
     }
-    this.arObject.setNativeProps({ scale: newScale });
   },
 
   render: function() {
     return (
-      <ViroARScene onTrackingUpdated={()=>{this.setState({text : "Collect ads to earn points!"})}}>
+      <ViroARScene onTrackingUpdated={()=>{this.setState({text : "Pinch/Collect Ads to donate funds!"})}}>
         <ViroText text={this.state.text} scale={[.05, .05, .05]} height={2} width={10} position={[0, .5, -1]} style={styles.MainTextStyle} />
+
+        <ViroText text={"You have accumulated: " + this.state.point.toString()} scale={[1, 1, 1]} height={2} width={10} position={[5, 5, -15]} style={styles.MainTextStyle} />
 
         <ViroAmbientLight color={"#aaaaaa"} />
         <ViroSpotLight innerAngle={5} outerAngle={90} direction={[0,-1,-.2]} position={[0, 3, 1]} color="#ffffff" castsShadow={true} />
@@ -73,30 +66,20 @@ var MainSceneAR = createReactClass({
                           require('./ARPortals/portal_res/portal_ship/portal_ship_specular.png')]}
               type="VRX"/>
           </ViroPortal>
-          {/* <Viro360Image source={require("./ARPortals/portal_res/360_island.jpg")} /> */}
-          <Viro360Image source={require("./ARPortals/portal_res/beach.jpg")} />
+          <Viro360Image source={require("./ARPortals/portal_res/360_island.jpg")} />
+          {/* <Viro360Image source={require("./ARPortals/portal_res/beach.jpg")} /> */}
           {/* <Viro360Image source={require("./ARPortals/portal_res/sunset.jpg")} /> */}
 
-          <ViroNode position={[0,0,-5]} dragType="FixedToWorld" onDrag={()=>{}} >
-            <Viro3DObject
-                source={require('./res/emoji_smile/emoji_smile.vrx')}
-                position={[0, .1, 0]}
-                scale={[.2, .2, .2]}
-                type="VRX"
-                onPinch={this._onPinch}
-                onError={err => console.log("error: ", err)}
-              //   onLoadStart={this._onLoadStart}
-              //   onLoadEnd={this._onLoadEnd}
-              />
-          </ViroNode>
-          <ViroNode position={[0,0,-10]} dragType="FixedDistance" onDrag={()=>{}} >
+          <ViroText text={"You have accumulated: " + this.state.point.toString()} scale={[0.5, 0.5, 0.5]} height={2} width={10} position={[3, 3, -10]} style={styles.MainTextStyle} />
+
+          <ViroNode position={[0,0,-10]} dragType="FixedDistance" onDrag={()=>{}}  ref={this._setARNodeRef}>
             <Viro3DObject source={require('./res/wish-ad/wish-ad.obj')}
                 position={[0, -5, 0]}
                 scale={[.05, .05, .05]}
                 rotation={[-90, 0, 0]}
                 type="OBJ"
                 onPinch={this._onPinch}
-                // onError={err => console.log("error: ", err)}
+                onError={err => console.log("error: ", err)}
                 // onLoadStart={this._onLoadStart}
                 // onLoadEnd={this._onLoadEnd}
               />
@@ -145,6 +128,24 @@ var MainSceneAR = createReactClass({
         
       </ViroARScene>
     );
+  },
+
+  _setARNodeRef(component) {
+    this.arNodeRef = component;
+  },
+
+  _onPinch(pinchState, scaleFactor, source) {
+    let newScale = this.state.scale.map((x)=>{return 0})
+  
+    if (pinchState == 3) {
+      this.setState({
+        scale: newScale, 
+        point: this.state.point+1
+      });
+  
+      return;
+    }
+    this.arNodeRef.setNativeProps({ scale: newScale });
   },
 });
 

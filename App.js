@@ -30,10 +30,15 @@ var sharedProps = {
 }
 
 // Sets the default scene you want for AR and VR
-var InitialARScene = require('./js/MainSceneAR');
+var SocialARScene = require('./js/MainSceneARSocial');
+var EnvARScene = require('./js/MainSceneAREnv');
+var RightsARScene = require('./js/MainSceneARRights');
 
 var UNSET = "UNSET";
 var AR_NAVIGATOR_TYPE = "AR";
+var SOCIAL = "S";
+var ENV = "E";
+var RIGHTS = "R";
 
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
@@ -45,7 +50,8 @@ export default class ADonate extends Component {
 
     this.state = {
       navigatorType : defaultNavigatorType,
-      sharedProps : sharedProps
+      sharedProps : sharedProps,
+      cause: "S"
     }
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._getARNavigator = this._getARNavigator.bind(this);
@@ -74,25 +80,25 @@ export default class ADonate extends Component {
           </Text>
 
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Unicef")}
+            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Unicef", ENV)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>Environmental{"\n"}{"\&"} Animal Care</Text>
+            <Text style={localStyles.buttonText}>World Wildlife Fund {"\n"}(WWF)</Text>
             {/* <Image source={require('./img/unicef.jpg')}  style={localStyles.img}/> */}
           </TouchableHighlight>
 
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Amnesty International")}
+            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Amnesty International", SOCIAL)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>Health {"\&"} Social</Text>
+            <Text style={localStyles.buttonText}>Doctors Without {"\n"}Borders</Text>
           </TouchableHighlight>
 
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Amnesty International")}
+            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE, "Amnesty International", RIGHTS)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>Human Rights</Text>
+            <Text style={localStyles.buttonText}>Amnesty International</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -101,19 +107,32 @@ export default class ADonate extends Component {
 
   // Returns the ViroARSceneNavigator which will start the AR experience
   _getARNavigator(organization) {
-    return (
-      <ViroARSceneNavigator {...this.state.sharedProps}
-        initialScene={{scene: InitialARScene}} />
-    );
+    if (this.state.cause === ENV){
+      return (
+        <ViroARSceneNavigator {...this.state.sharedProps}
+          initialScene={{scene: EnvARScene}} />
+      );
+    } else if (this.state.cause === RIGHTS){
+      return (
+        <ViroARSceneNavigator {...this.state.sharedProps}
+          initialScene={{scene: RightsARScene}} />
+      );
+    } else if (this.state.cause === SOCIAL){
+      return (
+        <ViroARSceneNavigator {...this.state.sharedProps}
+          initialScene={{scene: SocialARScene}} />
+      );
+    }
   }
-  
+
   // This function returns an anonymous/lambda function to be used
   // by the experience selector buttons
-  _getExperienceButtonOnPress(navigatorType, organization) {
+  _getExperienceButtonOnPress(navigatorType, organization, cause) {
     return () => {
       this.setState({
         navigatorType : navigatorType,
-        organization: organization
+        organization: organization,
+        cause: cause
       })
     }
   }

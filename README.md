@@ -2,7 +2,7 @@
 
 ## Demo
 
-[![ADnote demo](./gallery.jpg | width=100)](https://www.youtube.com/watch?v=rU9IfiS4YV0&feature=youtu.be)
+[![ADnote demo](./gallery.jpg =250x)](https://www.youtube.com/watch?v=rU9IfiS4YV0&feature=youtu.be)
 
 
 ## Origin

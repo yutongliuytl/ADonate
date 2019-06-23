@@ -29,4 +29,4 @@ Note that this is a quick prototype/proof of concept. There is definitely a lot 
 
 ## Demo
 
-Youtube link: [![ADnote demo]](https://www.youtube.com/watch?v=rU9IfiS4YV0&feature=youtu.be)
+Youtube link: [![ADnote demo]](gallery.jpg)(https://www.youtube.com/watch?v=rU9IfiS4YV0&feature=youtu.be)

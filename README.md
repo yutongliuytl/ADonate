@@ -1,5 +1,10 @@
 # ADonate
 
+## Demo
+
+[![ADnote demo](./gallery.jpg | width=100)](https://www.youtube.com/watch?v=rU9IfiS4YV0&feature=youtu.be)
+
+
 ## Origin
 
 Advertisement has dominated the Internet in the past decade. It has become ubiquitous and have proven to be an incredible source of cash flow by the likes of Facebook or YouTube. This however can be used in better ways than simply for profit. What if we could make this source of cash into something that can improve the lives of others? That can bring good to the world? And all that, with some augmented reality fun and some exercise!
@@ -26,7 +31,3 @@ There is panels above the user's head that will keep track of the number of ads 
 ## Expansion
 
 Note that this is a quick prototype/proof of concept. There is definitely a lot of room for improvement, but I hope the core of it can be understood. We would like to integrate actual ad services such as **Google Ad Mob** or **Ad from Snap Kit** to the application in order to actually collect funds. We would also like to create a database to store both the number of ads collected for each organization as well as creating user accounts using **Snap Login Kit**. Adding the Snap Kit could definitely be a huge plus for us as SnapChat is a big player when it comes to augmented reality. We could therefore experiment with what the Bitmoji and the Snap Creative Kit has to offer. It could also be ideal if we could find a more diverse group of organizations!
-
-## Demo
-
-Youtube link: [![ADnote demo](./gallery.jpg)](https://www.youtube.com/watch?v=rU9IfiS4YV0&feature=youtu.be)
